@@ -1,0 +1,11 @@
+version: "3"
+services:
+  front:
+    image: node:16-alpine
+    working_dir: /app
+    user: node
+    volumes:
+      - ./:/app
+    ports:
+      - 7000:7000
+    command: sh -c 'tail -f /dev/null'

@@ -1,0 +1,35 @@
+### Create a new user
+
+POST http://localhost:7000/auth/signup
+content-type: application/json
+
+{
+  "email": "joao.faria@apside.pt",
+  "password": "123456s"
+}
+
+### Login with user
+GET http://localhost:7000/auth/1
+
+### Find all users by email
+GET http://localhost:7000/auth?email=contato@fcosantos.pt
+
+### Find all users limit
+GET http://localhost:7000/auth/limit/2
+
+### Find all users pagination
+GET http://localhost:7000/auth/pagination/1
+
+### Find all users by email like
+GET http://localhost:7000/auth/like/conta
+
+### Delete user
+DELETE http://localhost:7000/auth/1
+
+### Update user
+PATCH http://localhost:7000/auth/2
+content-type: application/json
+
+{
+  "email": "contato@fcosantos.pt"
+}
