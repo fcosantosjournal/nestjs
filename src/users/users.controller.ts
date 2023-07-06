@@ -3,6 +3,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
 import { response } from 'express';
+import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 
 @Controller('auth')
 export class UsersController {
@@ -17,13 +18,13 @@ export class UsersController {
         return response;
     }
 
-    @UseInterceptors(ClassSerializerInterceptor)
+    @UseInterceptors(SerializeInterceptor)
     @Get('/:id')
     findUser(@Param('id') id: string) {
         return this.usersService.checkUserById(parseInt(id));
     }
 
-    @UseInterceptors(ClassSerializerInterceptor)
+    @UseInterceptors(SerializeInterceptor)
     @Get()
     findAllUsers(@Query('email') email: string) {
         return this.usersService.find(email);

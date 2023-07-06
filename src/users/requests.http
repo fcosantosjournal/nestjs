@@ -4,12 +4,12 @@ POST http://localhost:7000/auth/signup
 content-type: application/json
 
 {
-  "email": "joao.faria@apside.pt",
-  "password": "123456s"
+  "email": "joao.faria@apside.com",
+  "password": "123456ssdfsdf"
 }
 
 ### Login with user
-GET http://localhost:7000/auth/1
+GET http://localhost:7000/auth/2
 
 ### Find all users by email
 GET http://localhost:7000/auth?email=contato@fcosantos.pt
