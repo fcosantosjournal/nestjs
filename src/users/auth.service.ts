@@ -33,15 +33,19 @@ export class AuthService {
     }
 
     async signin(email: string, password: string){
+        
         const [user] = await this.usersService.find(email);
         if(!user){
             throw new NotFoundException('User not found');
         }
 
+        //Split the password and key to rebuild the password and check the result
         const [key, storedHash] = user.password.split('.');
 
+        //Rebuild the password using the key
         const hash = (await scrypt(password, key, 32)) as Buffer;
 
+        //Comparation between the storedHash and the rebuilding proccess
         if(storedHash !== hash.toString('hex')) {
             throw new BadRequestException('User or password wrong');
         }
