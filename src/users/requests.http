@@ -4,8 +4,17 @@ POST http://localhost:7000/auth/signup
 content-type: application/json
 
 {
-  "email": "joao.faria@apside.com",
+  "email": "joao.faria3@apside.com",
   "password": "123456ssdfsdf"
+}
+
+### Login
+POST http://localhost:7000/auth/signin
+content-type: application/json
+
+{
+  "email": "joao.faria3@apside.com",
+  "password": "123456fsdfsdf"
 }
 
 ### Login with user
