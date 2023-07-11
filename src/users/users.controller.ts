@@ -1,30 +1,32 @@
-import { Body, Controller, Delete, Patch, Get, Param, Post, Query, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Body, Controller, Delete, Patch, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
 import { response } from 'express';
-import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
-    constructor(private usersService: UsersService) {}
+    constructor(private usersService: UsersService, private authService: AuthService) {}
 
     @Post('/signup')
     createUser(@Body() body: CreateUserDto) {
-        const newUser = this.usersService.create(body.email, body.password);
-        const response = newUser.then(function(result) {
-            return JSON.stringify({"id": result.id, "email": result.email});
-        });
-        return response;
+        return this.authService.signup(body.email, body.password);
     }
 
-    @UseInterceptors(SerializeInterceptor)
+    @Post('/signin')
+    signin(@Body() body: CreateUserDto) {
+        return this.authService.signin(body.email, body.password);
+    }
+
     @Get('/:id')
     findUser(@Param('id') id: string) {
         return this.usersService.checkUserById(parseInt(id));
     }
 
-    @UseInterceptors(SerializeInterceptor)
     @Get()
     findAllUsers(@Query('email') email: string) {
         return this.usersService.find(email);
