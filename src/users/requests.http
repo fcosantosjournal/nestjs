@@ -4,7 +4,7 @@ POST http://localhost:7000/auth/signup
 content-type: application/json
 
 {
-  "email": "joao.faria3@apside.com",
+  "email": "test4@test.com",
   "password": "123456ssdfsdf"
 }
 
@@ -13,12 +13,18 @@ POST http://localhost:7000/auth/signin
 content-type: application/json
 
 {
-  "email": "joao.faria3@apside.com",
-  "password": "123456fsdfsdf"
+  "email": "test3@test.com",
+  "password": "123456ssdfsdf"
 }
 
+### Get this user
+GET http://localhost:7000/auth/whoami
+
+### Signout
+POST http://localhost:7000/auth/signout
+
 ### Login with user
-GET http://localhost:7000/auth/2
+GET http://localhost:7000/auth/7
 
 ### Find all users by email
 GET http://localhost:7000/auth?email=contato@fcosantos.pt
